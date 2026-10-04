@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>給与・時給計算ツール</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>給与・時給計算</h1>
+
+    <!-- 時給設定エリア -->
+    <section class="card">
+      <h2>時給設定</h2>
+      <div class="input-group">
+        <label for="baseWage">基本時給 (平日17時前):</label>
+        <input type="number" id="baseWage" value="1000" step="10">
+      </div>
+
+      <div class="rate-grid">
+        <div class="rate-item">
+          <h3>平日</h3>
+          <div>
+            <label>17:00前:</label>
+            <input type="number" id="wageWeekdayDay" value="1000">
+          </div>
+          <div>
+            <label>17:00後:</label>
+            <input type="number" id="wageWeekdayNight" value="1100">
+          </div>
+        </div>
+
+        <div class="rate-item">
+          <h3>土曜日</h3>
+          <div>
+            <label>17:00前:</label>
+            <input type="number" id="wageSatDay" value="1100">
+          </div>
+          <div>
+            <label>17:00後:</label>
+            <input type="number" id="wageSatNight" value="1200">
+          </div>
+        </div>
+
+        <div class="rate-item">
+          <h3>日曜・祝日</h3>
+          <div>
+            <label>17:00前:</label>
+            <input type="number" id="wageSunHoliDay" value="1200">
+          </div>
+          <div>
+            <label>17:00後:</label>
+            <input type="number" id="wageSunHoliNight" value="1300">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 勤務時間入力エリア -->
+    <section class="card">
+      <h2>勤務入力</h2>
+      <div class="input-group">
+        <label for="workDate">出勤日:</label>
+        <input type="date" id="workDate">
+      </div>
+
+      <div class="input-group flex-row">
+        <div>
+          <label for="startTime">開始時間:</label>
+          <input type="time" id="startTime" value="09:00">
+        </div>
+        <div>
+          <label for="endTime">終了時間:</label>
+          <input type="time" id="endTime" value="18:00">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="breakMinutes">休憩時間 (分):</label>
+        <input type="number" id="breakMinutes" value="60" min="0" step="5">
+      </div>
+
+      <button id="calcBtn" class="btn primary">計算する</button>
+    </section>
+
+    <!-- 計算結果表示エリア -->
+    <section class="card" id="resultCard" style="display: none;">
+      <h2>計算結果</h2>
+      <div class="total-amount">
+        合計支給額: <span id="totalSalary">0</span> 円
+      </div>
+      <div class="date-type-badge" id="dateTypeBadge"></div>
+
+      <div class="details-list" id="detailsList">
+        <!-- JSで内訳（17時前・17時後・深夜など）が挿入されます -->
+      </div>
+    </section>
+
+    <!-- 計算履歴エリア -->
+    <section class="card">
+      <div class="history-header">
+        <h2>計算履歴</h2>
+        <button id="clearHistoryBtn" class="btn danger-text">履歴消去</button>
+      </div>
+      <div id="historyList" class="history-list">
+        <p class="empty-msg">履歴はありません</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
